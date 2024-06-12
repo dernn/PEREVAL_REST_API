@@ -22,6 +22,12 @@ class Pereval(models.Model):
     connect = models.CharField(max_length=128)
     add_time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
-    # coords = None
+    coords = models.OneToOneField('Coords', on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='new')
     # level = None
+
+
+class Coords(models.Model):
+    latitude = models.DecimalField(decimal_places=8, max_digits=10)
+    longitude = models.DecimalField(decimal_places=8, max_digits=10)
+    height = models.IntegerField()

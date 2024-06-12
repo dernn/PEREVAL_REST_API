@@ -48,3 +48,10 @@ class Level(models.Model):
     summer = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
     autumn = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
     winter = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
+
+
+class Images(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='media/img')
+    add_time = models.DateTimeField(auto_now_add=True)
+    pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='images')

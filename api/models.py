@@ -44,10 +44,10 @@ class Level(models.Model):
         ('3B', '3B'),
     )
 
-    spring = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
-    summer = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
-    autumn = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
-    winter = models.CharField(max_length=2, choices=LEVEL_CHOICE, default='н/к')
+    spring = models.CharField(max_length=3, choices=LEVEL_CHOICE, default='н/к')
+    summer = models.CharField(max_length=3, choices=LEVEL_CHOICE, default='н/к')
+    autumn = models.CharField(max_length=3, choices=LEVEL_CHOICE, default='н/к')
+    winter = models.CharField(max_length=3, choices=LEVEL_CHOICE, default='н/к')
 
 
 class Images(models.Model):

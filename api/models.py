@@ -55,3 +55,7 @@ class Images(models.Model):
     image = models.ImageField(upload_to=f'media/img/pereval_{"pereval".id}')
     add_time = models.DateTimeField(auto_now_add=True)
     pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='images')
+
+    def __str__(self):
+        return f'{self.title}'
+    

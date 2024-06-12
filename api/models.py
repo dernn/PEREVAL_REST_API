@@ -52,6 +52,6 @@ class Level(models.Model):
 
 class Images(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='media/img')
+    image = models.ImageField(upload_to=f'media/img/pereval_{"pereval".id}')
     add_time = models.DateTimeField(auto_now_add=True)
     pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='images')

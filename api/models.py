@@ -5,8 +5,9 @@ from api.utils import get_path_upload_image
 
 class Users(models.Model):
     email = models.CharField(max_length=80, unique=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    fam = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    otc = models.CharField(max_length=255)
     phone = models.CharField(max_length=21)
 
 

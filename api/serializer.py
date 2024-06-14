@@ -25,4 +25,4 @@ class ImagesSerializer(serializers.ModelSerializer):
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['email', 'first_name', 'last_name', 'phone']
+        fields = ['email', 'fam', 'name', 'otc', 'phone']

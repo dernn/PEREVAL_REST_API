@@ -1,4 +1,4 @@
-from .models import Coords, Level, Pereval, Images, Users
+from api.models import Coords, Level, Pereval, Images, Users
 from rest_framework import serializers
 
 
@@ -11,7 +11,7 @@ class CoordsSerializer(serializers.ModelSerializer):
 class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
-        fields = ['spring', 'summer', 'autumn', 'winter']
+        fields = ['winter', 'summer', 'autumn', 'spring']
 
 
 class ImagesSerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class ImagesSerializer(serializers.ModelSerializer):
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['email', 'fam', 'name', 'otc', 'phone']
+        fields = ['email', 'phone', 'fam', 'name', 'otc']
 
 
 class PerevalSerializer(serializers.ModelSerializer):
@@ -57,7 +57,7 @@ class PerevalSerializer(serializers.ModelSerializer):
         pereval = Pereval.objects.create(**validated_data, user=user, coords=coords, level=level)
 
         for img in images:
-            image = img.pop('images')
+            image = img.pop('image')
             title = img.pop('title')
             Images.objects.create(image=image, title=title, pereval=pereval)
 

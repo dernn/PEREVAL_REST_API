@@ -15,7 +15,7 @@ class LevelSerializer(serializers.ModelSerializer):
 
 
 class ImagesSerializer(serializers.ModelSerializer):
-    data = serializers.URLField()
+    image = serializers.URLField()
 
     class Meta:
         model = Images

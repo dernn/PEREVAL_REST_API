@@ -26,3 +26,7 @@ class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ['email', 'fam', 'name', 'otc', 'phone']
+
+
+class PerevalSerializer(serializers.ModelSerializer):
+    pass

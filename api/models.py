@@ -4,7 +4,7 @@ from api.utils import get_path_upload_image
 
 
 class Users(models.Model):
-    email = models.CharField(max_length=80, unique=True)
+    email = models.CharField(max_length=80)
     fam = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     otc = models.CharField(max_length=255)

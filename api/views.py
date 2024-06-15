@@ -53,3 +53,26 @@ class PerevalViewSet(viewsets.ModelViewSet):
                 'message': 'Internal Server Error',
                 'id': None,
             })
+
+    # PATCH-method submitData
+    def partial_update(self, request, *args, **kwargs):
+        pereval = self.get_object()
+        if pereval.status == 'new':
+            serializer = PerevalSerializer(pereval, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({
+                    'state': '1',
+                    'message': 'Entry successfully modified',
+                })
+            else:
+                return Response({
+                    'state': '0',
+                    'message': serializer.errors["non_field_errors"][0]
+                })
+        else:
+            return Response({
+                'state': '0',
+                'message': f'Rejected! Reason: object status "{pereval.get_status_display()}"'
+                # status must be "new"
+            })

@@ -37,6 +37,7 @@ class Coords(models.Model):
 
 
 class Level(models.Model):
+    # 'A', 'B' - Latin alphabet; 'н/к' - Cyrillic
     LEVEL_CHOICE = (
         ('н/к', 'н/к'),
         ('1A', '1A'),

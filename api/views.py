@@ -31,7 +31,7 @@ class PerevalViewSet(viewsets.ModelViewSet):
     serializer_class = PerevalSerializer
 
     # POST-method submitData
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
         serializer = PerevalSerializer(data=request.data)
 
         if serializer.is_valid():

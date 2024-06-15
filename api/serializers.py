@@ -57,3 +57,19 @@ class PerevalSerializer(WritableNestedModelSerializer):
         model = Pereval
         fields = ['beauty_title', 'title', 'other_titles', 'connect',
                   'add_time', 'status', 'user', 'coords', 'level', 'images']
+
+    def validate(self, data):
+        if self.instance:
+            instance_user = self.instance.user
+            data_user = data.get('user')
+            validating_user_fields = [
+                instance_user.email != data_user['email'],
+                instance_user.phone != data_user['phone'],
+                instance_user.fam != data_user['fam'],
+                instance_user.name != data_user['name'],
+                instance_user.otc != data_user['otc'],
+
+            ]
+            if data_user and any(validating_user_fields):
+                raise serializers.ValidationError('Rejected: user data cannot be modified')
+        return data

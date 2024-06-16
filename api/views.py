@@ -73,6 +73,6 @@ class PerevalViewSet(viewsets.ModelViewSet):
         else:
             return Response({
                 'state': '0',
-                'message': f'Rejected! Reason: object status "{pereval.get_status_display()}"'
+                'message': f'Rejected: object status "{pereval.get_status_display()}"'
                 # status must be "new"
             })

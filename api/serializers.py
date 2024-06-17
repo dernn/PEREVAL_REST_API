@@ -1,4 +1,7 @@
 from api.models import Coords, Level, Pereval, Images, Users
+
+from drf_writable_nested import WritableNestedModelSerializer
+
 from rest_framework import serializers
 
 
@@ -44,7 +47,7 @@ class UsersSerializer(serializers.ModelSerializer):
         fields = ['email', 'phone', 'fam', 'name', 'otc']
 
 
-class PerevalSerializer(serializers.ModelSerializer):
+class PerevalSerializer(WritableNestedModelSerializer):
     user = UsersSerializer()
     coords = CoordsSerializer()
     level = LevelSerializer()
@@ -53,28 +56,24 @@ class PerevalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pereval
         fields = ['beauty_title', 'title', 'other_titles', 'connect',
-                  'add_time', 'user', 'coords', 'level', 'images', 'status']
+                  'add_time', 'status', 'user', 'coords', 'level', 'images']
 
-    def create(self, validated_data):
-        user = validated_data.pop('user')
-        coords = validated_data.pop('coords')
-        level = validated_data.pop('level')
-        images = validated_data.pop('images')
+    def validate(self, data):
+        if self.instance:
+            instance_user = self.instance.user
+            data_user = data.get('user')
+            validating_user_fields = [
+                instance_user.email != data_user['email'],
+                instance_user.phone != data_user['phone'],
+                instance_user.fam != data_user['fam'],
+                instance_user.name != data_user['name'],
+                instance_user.otc != data_user['otc'],
 
-        current_user = Users.objects.filter(email=user['email'])
-        if current_user.exists():
-            user_serialized = UsersSerializer(data=user)
-            user = user_serialized.save()
-        else:
-            user = Users.objects.create(**user)
-
-        coords = Coords.objects.create(**coords)
-        level = Level.objects.create(**level)
-        pereval = Pereval.objects.create(**validated_data, user=user, coords=coords, level=level)
-
-        for img in images:
-            image = img.pop('image')
-            title = img.pop('title')
-            Images.objects.create(image=image, title=title, pereval=pereval)
-
-        return pereval
+            ]
+            if data_user and any(validating_user_fields):
+                raise serializers.ValidationError('Rejected: user data cannot be modified')
+            elif self.instance.status != data.get('status'):
+                raise serializers.ValidationError('Rejected: status cannot be modified')
+            elif self.instance.status != data.get('add_time'):
+                raise serializers.ValidationError('Rejected: add_time cannot be modified')
+        return data

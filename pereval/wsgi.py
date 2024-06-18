@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 
 # For your web app itself: loading your .env file in your WSGI file
 project_folder = os.path.expanduser('/home/dernn/PEREVAL_REST_API')  # adjust as appropriate
-load_dotenv(os.path.join(project_folder, '.env'))
+load_dotenv(os.path.join(project_folder, '.env'), override=True)
 
 # assuming your django settings file is at '/home/dernn/mysite/mysite/settings.py'
 # and your manage.py is is at '/home/dernn/mysite/manage.py'

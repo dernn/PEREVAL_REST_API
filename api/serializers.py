@@ -57,6 +57,7 @@ class PerevalSerializer(WritableNestedModelSerializer):
         model = Pereval
         fields = ['beauty_title', 'title', 'other_titles', 'connect',
                   'add_time', 'status', 'user', 'coords', 'level', 'images']
+        read_only_fields = ['status']
 
     def validate(self, data):
         if self.instance:

@@ -17,6 +17,7 @@ Including another URLconf
 from api.views import PerevalViewSet
 
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import include, path
 
 from rest_framework import routers
@@ -27,4 +28,5 @@ router.register(r'submitData', PerevalViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('', lambda request: redirect('api/', permanent=False))
 ]

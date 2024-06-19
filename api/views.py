@@ -30,6 +30,7 @@ class PerevalViewSet(viewsets.ModelViewSet):
     queryset = Pereval.objects.all()
     serializer_class = PerevalSerializer
     filterset_fields = ['user__email']
+    http_method_names = ['get', 'post', 'patch']
 
     # POST-method submitData
     def create(self, request, *args, **kwargs):

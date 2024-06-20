@@ -32,6 +32,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('', lambda request: redirect('api/', permanent=False)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),  # to download .yaml
-    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('api/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]

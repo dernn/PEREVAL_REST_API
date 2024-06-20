@@ -13,3 +13,6 @@ omit =
     *init*
     # omit this single file
     manage.py
+    api\utils.py
+    pereval\asgi.py
+    pereval\wsgi.py

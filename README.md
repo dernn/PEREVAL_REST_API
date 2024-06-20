@@ -1,4 +1,4 @@
-![2024-06-20_235455](https://user-images.githubusercontent.com/108303572/228615897-8bd00bcd-cd95-4a56-9783-34211fdf2780.jpg)
+![pereval](https://raw.githubusercontent.com/dernn/PEREVAL_REST_API/a7026d0b452c25ea6864a547b56e9ea7598c4896/assets/pereval_online.jpg)
 
 # PEREVAL REST API
 
@@ -19,17 +19,7 @@
 
 ___
 
-Внешние ресурсы:
-
-CJM пользователя. CJM (customer journey map) — это карта, описывающая путь пользователя при взаимодействии с продуктом,
-чтобы лучше понимать, как будет работать мобильное приложение. CJM доступна
-[по ссылке](https://docs.google.com/spreadsheets/d/1eNFtPqYUFftQ4v-OC2K91rDGwBfUhsLh3UvEY1CXov0/edit?gid=0#gid=0).
-
-UX/UI [прототип](https://www.figma.com/proto/tTeEh80nuYQIgbuCJy9dr8/%D0%A4%D0%A1%D0%A2%D0%A0-(Copy)-(Copy)?kind=proto&node-id=598-34467&page-id=61%3A2&scaling=scale-down&show-proto-sidebar=1&starting-point-node-id=570%3A2127)
-интерфейса в Figma.
-
-Сейчас ФСТР использует [вот такую](https://drive.google.com/file/d/1TuFcH5k-lU21b6xQtCeQ_UTW8OJwR9f3/view) структуру
-базы данных. Внимательно изучи её. Тебе нужно её немного доработать.
+Прототип интерфейса в Figma: [fstr.figma.com/proto](https://www.figma.com/proto/tTeEh80nuYQIgbuCJy9dr8/%D0%A4%D0%A1%D0%A2%D0%A0-(Copy)-(Copy)?kind=proto&node-id=598-34467&page-id=61%3A2&scaling=scale-down&show-proto-sidebar=1&starting-point-node-id=570%3A2127)
 
 ___
 
@@ -143,5 +133,10 @@ _* документация сгенерирована с помощью пак�
 
 ___
 
-_** код покрыт тестами на 80%_
+<details>
 
+_<summary>** код покрыт тестами на 80%</summary>_
+
+![coverage image](https://raw.githubusercontent.com/dernn/PEREVAL_REST_API/a7026d0b452c25ea6864a547b56e9ea7598c4896/assets/coverage_report.JPG)
+
+</details>

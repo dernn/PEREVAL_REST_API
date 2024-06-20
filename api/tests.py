@@ -1,6 +1,7 @@
 from api.models import Coords, Images, Level, Pereval, Users
 from api.serializers import PerevalSerializer
 
+from django.test import TestCase
 from django.urls import reverse
 
 from rest_framework import status
@@ -85,3 +86,66 @@ class PerevalAPITestCase(APITestCase):
         serializer_data = PerevalSerializer(self.pereval_1).data
         self.assertEqual(serializer_data, response.data)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
+
+
+class PerevalSerializerTestCase(TestCase):
+    def setUp(self):
+        self.pereval_1 = Pereval.objects.create(
+            beauty_title='BTitle_1',
+            title='BT_1',
+            other_titles='BT_11',
+            connect='Connects1',
+            user=Users.objects.create(
+                email='email1@mail.ru',
+                fam='Lastname1',
+                name='Name1',
+                otc='Patronymic1',
+                phone='89210000001'
+            ),
+            coords=Coords.objects.create(
+                latitude='11.11111111',
+                longitude='11.11111111',
+                height=111
+            ),
+            level=Level.objects.create(
+                winter='1A',
+                spring='1A',
+                summer='1A',
+                autumn='1A'
+            ),
+        )
+        self.image_1 = Images.objects.create(
+            title='imageTitle1',
+            image='image1.jpg',
+            pereval=self.pereval_1
+        )
+
+        self.pereval_2 = Pereval.objects.create(
+            beauty_title='BTitle_2',
+            title='BT_2',
+            other_titles='BT_22',
+            connect='Connects2',
+            user=Users.objects.create(
+                email='email2@mail.ru',
+                fam='Lastname2',
+                name='Name2',
+                otc='Patronymic2',
+                phone='89210000002'
+            ),
+            coords=Coords.objects.create(
+                latitude='22.22222222',
+                longitude='22.22222222',
+                height=222
+            ),
+            level=Level.objects.create(
+                winter='2A',
+                spring='2A',
+                summer='2A',
+                autumn='2A'
+            )
+        )
+        self.image_2 = Images.objects.create(
+            title='imageTitle2',
+            image='image2.jpg',
+            pereval=self.pereval_2
+        )

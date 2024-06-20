@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 
-class PerevalApiTestCase(APITestCase):
+class PerevalAPITestCase(APITestCase):
     def setUp(self):
         self.pereval_1 = Pereval.objects.create(
             beauty_title='Beauty title 1',
@@ -77,4 +77,11 @@ class PerevalApiTestCase(APITestCase):
         serializer_data = PerevalSerializer([self.pereval_1, self.pereval_2], many=True).data
         self.assertEqual(serializer_data, response.data)
         self.assertEqual(len(serializer_data), 2)
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+
+    def test_get_detail(self):
+        url = reverse('pereval-detail', args=(self.pereval_1.id,))
+        response = self.client.get(url)
+        serializer_data = PerevalSerializer(self.pereval_1).data
+        self.assertEqual(serializer_data, response.data)
         self.assertEqual(status.HTTP_200_OK, response.status_code)

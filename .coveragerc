@@ -1,0 +1,18 @@
+[run]
+
+# coverage run manage.py test
+# coverage report
+# coverage html
+
+source = .
+omit =
+    # omit all migrations directories
+    *\migrations\*
+    # omit all similar entries
+    *tests*
+    *init*
+    # omit this single file
+    manage.py
+    api\utils.py
+    pereval\asgi.py
+    pereval\wsgi.py

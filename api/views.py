@@ -78,3 +78,11 @@ class PerevalViewSet(viewsets.ModelViewSet):
                 'message': f'Rejected: object status "{pereval.get_status_display()}"'
                 # status must be "new"
             })
+
+    def paginate_queryset(self, queryset):
+        """
+        If you pass parameter '?get_all=true' when making the request, response will be without pagination.
+        """
+        if self.request.query_params.get('get_all', False) == 'true':
+            return None
+        return super().paginate_queryset(queryset)

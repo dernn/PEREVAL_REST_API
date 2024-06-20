@@ -71,24 +71,10 @@ class PerevalApiTestCase(APITestCase):
             pereval=self.pereval_2
         )
 
-    def test_get(self):
+    def test_get_list(self):
         url = f'{reverse("pereval-list")}?get_all=true'
         response = self.client.get(url)
         serializer_data = PerevalSerializer([self.pereval_1, self.pereval_2], many=True).data
-
-        print('--------url----------')
-        print(url)
-        print('------response-------')
-        print(response)
-        print('-----serializer------')
-        print(serializer_data)
-        print('----response.data----')
-        print(response.data)
-        # print('---response[results]-')
-        # print(response.data['results'])
-
-        # сравнивает serializer_data и response.data
         self.assertEqual(serializer_data, response.data)
-        # проверяет, что количество serializer_data = 2
         self.assertEqual(len(serializer_data), 2)
         self.assertEqual(status.HTTP_200_OK, response.status_code)

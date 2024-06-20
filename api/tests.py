@@ -149,3 +149,76 @@ class PerevalSerializerTestCase(TestCase):
             image='image2.jpg',
             pereval=self.pereval_2
         )
+
+    def test_get_list(self):
+        serializer_data = PerevalSerializer([self.pereval_1, self.pereval_2], many=True).data
+        expected_data = [
+            {
+                'id': self.pereval_1.id,
+                'beauty_title': 'BTitle_1',
+                'title': 'BT_1',
+                'other_titles': 'BT_11',
+                'connect': 'Connects1',
+                'add_time': self.pereval_1.add_time.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                'status': 'new',
+                'user': {
+                    'email': 'email1@mail.ru',
+                    'fam': 'Lastname1',
+                    'name': 'Name1',
+                    'otc': 'Patronymic1',
+                    'phone': '89210000001'
+                },
+                'coords': {
+                    'latitude': '11.11111111',
+                    'longitude': '11.11111111',
+                    'height': 111
+                },
+                'level': {
+                    'winter': '1A',
+                    'spring': '1A',
+                    'summer': '1A',
+                    'autumn': '1A'
+                },
+                'images': [
+                    {
+                        'title': 'imageTitle1',
+                        'image': 'image1.jpg'
+                    },
+                ]
+            },
+
+            {
+                'id': self.pereval_2.id,
+                'beauty_title': 'BTitle_2',
+                'title': 'BT_2',
+                'other_titles': 'BT_22',
+                'connect': 'Connects2',
+                'add_time': self.pereval_2.add_time.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                'status': 'new',
+                'user': {
+                    'email': 'email2@mail.ru',
+                    'fam': 'Lastname2',
+                    'name': 'Name2',
+                    'otc': 'Patronymic2',
+                    'phone': '89210000002'
+                },
+                'coords': {
+                    'latitude': '22.22222222',
+                    'longitude': '22.22222222',
+                    'height': 222
+                },
+                'level': {
+                    'winter': '2A',
+                    'spring': '2A',
+                    'summer': '2A',
+                    'autumn': '2A'
+                },
+                'images': [
+                    {
+                        'title': 'imageTitle2',
+                        'image': 'image2.jpg'
+                    },
+                ]
+            }
+        ]
+        self.assertEquals(serializer_data, expected_data)

@@ -1,5 +1,5 @@
 from api.models import Coords, Images, Level, Pereval, Users
-from api.serializers import PerevalSerializer
+from api.serializers import PerevalSerializer, UsersSerializer
 
 from django.test import TestCase
 from django.urls import reverse
@@ -222,3 +222,36 @@ class PerevalSerializerTestCase(TestCase):
             }
         ]
         self.assertEquals(serializer_data, expected_data)
+
+
+class UsersAPITestCase(APITestCase):
+    def setUp(self):
+        self.user_1 = Users.objects.create(
+            email='email1@mail.ru',
+            fam='Lastname1',
+            name='Name1',
+            otc='Patronymic1',
+            phone='89210000001'
+        )
+        self.user_2 = Users.objects.create(
+            email='email2@mail.ru',
+            fam='Lastname2',
+            name='Name2',
+            otc='Patronymic2',
+            phone='89210000002'
+        )
+
+    def test_get_list(self):
+        url = f'{reverse("users-list")}?get_all=true'
+        response = self.client.get(url)
+        serializer_data = UsersSerializer([self.user_1, self.user_2], many=True).data
+        self.assertEquals(serializer_data, response.data)
+        self.assertEquals(len(serializer_data), 2)
+        self.assertEquals(status.HTTP_200_OK, response.status_code)
+
+    def test_get_detail(self):
+        url = reverse('users-detail', args=(self.user_1.id,))
+        response = self.client.get(url)
+        serializer_data = UsersSerializer(self.user_1).data
+        self.assertEquals(serializer_data, response.data)
+        self.assertEquals(status.HTTP_200_OK, response.status_code)

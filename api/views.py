@@ -10,6 +10,11 @@ class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = UsersSerializer
 
+    def paginate_queryset(self, queryset):
+        if self.request.query_params.get('get_all', False) == 'true':
+            return None
+        return super().paginate_queryset(queryset)
+
 
 class CoordsViewSet(viewsets.ModelViewSet):
     queryset = Coords.objects.all()
